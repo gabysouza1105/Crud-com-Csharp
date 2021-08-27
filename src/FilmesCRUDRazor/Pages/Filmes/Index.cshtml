@@ -1,0 +1,98 @@
+@page
+@model FilmesCRUDRazor.Pages.Filmes.IndexModel
+
+@{
+   ViewData["Title"] = "Index";
+}
+
+@{
+   Layout = "_Layout";
+}
+
+<div class="container">
+   <div class="row">
+      <div class="col-md-12">
+         <h2>Filmes Top +</h2>
+         <p>
+            <a class="btn btn-outline-primary" asp-page="Create"><i class="bi bi-plus-circle"></i> Adicionar
+               Filme</a>
+         </p>
+         <form>
+            <div class="row">
+               <div class="col-md-6">
+                  <label class="text-left">Título do Filme</label>
+                  <input class="form-control" type="text" name="BuscaPorGenero" />
+               </div>
+               <div class="col-md-3">
+                  <label class="text-left">Gênero</label>
+                  <select class="form-control" asp-for="FilmePorGenero" asp-items="Model.Generos">
+                     <option value="">Todos</option>
+                  </select>
+               </div>
+               <div class="col-md-3">
+                  <button class="btn btn-secondary botaoFiltrar">Filtrar</button>
+               </div>
+            </div>
+            <hr />
+            <br />
+
+         </form>
+         <div class="table-responsive">
+            <table class="table table-striped">
+               <thead>
+                  <tr>
+                     <th class="text-center">
+                        @Html.DisplayNameFor(model => model.Filme[0].Titulo)
+                     </th>
+                     <th class="text-center">
+                        @Html.DisplayNameFor(model => model.Filme[0].DataLancamento)
+                     </th>
+                     <th class="text-center">
+                        @Html.DisplayNameFor(model => model.Filme[0].Genero)
+                     </th>
+                     <th class="text-center">
+                        @Html.DisplayNameFor(model => model.Filme[0].Preco)
+                     </th>
+                     <th class="text-center">Ações</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  @foreach (var item in Model.Filme)
+                  {
+                     <tr>
+                        <td class="text-center">
+                           @Html.DisplayFor(modelItem => item.Titulo)
+                        </td>
+                        <td class="text-center">
+                           @Html.DisplayFor(modelItem => item.DataLancamento)
+                        </td>
+                        <td class="text-center">
+                           @Html.DisplayFor(modelItem => item.Genero)
+                        </td>
+                        <td class="text-center">
+                           @Html.DisplayFor(modelItem => item.Preco)
+                        </td>
+                        <td class="text-center">
+                           <a class="btn btn-outline-warning" asp-page="./Edit" asp-route-id="@item.FilmeId"><i class="bi bi-pencil-square botaoIcone"></i></a> |
+                           <a class="btn btn-outline-info" asp-page="./Details" asp-route-id="@item.FilmeId"><i class="bi bi-info-circle"></i></a> |
+                           <a class="btn btn-outline-danger" asp-page="./Delete" asp-route-id="@item.FilmeId"><i class="bi bi-trash"></i></a>
+                        </td>
+                     </tr>
+                  }
+               </tbody>
+            </table>
+            <div class="clearfix">
+               <ul class="pagination pull-right">
+                  <li><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                  <li class=""><a href="#">1</a></li>
+                  <li class=""><a href="#">2</a></li>
+                  <li class=""><a href="#">3</a></li>
+                  <li class=""><a href="#">4</a></li>
+                  <li class=""><a href="#">5</a></li>
+                  <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
